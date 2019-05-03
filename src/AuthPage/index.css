@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.login_form{
+  width: 800px;
+  max-width: 300px;
+  border: 1px solid rgba(24, 144, 255, .2);
+  margin: 50px auto;
+  padding: 10px;
+}
+.ant-form-item:last-of-type{
+  margin-bottom: 0;
+}
+.submit_button{
+  width: 100%;
+}
+
+.login_form_title{
+  text-align: center;
+  margin-bottom: 60px;
+  margin-top: 10px;
+  font-weight: 400;
+}
+
+.login_form .ant-tabs-bar{
+  max-width: 80%;
+  margin: auto;
+  margin-bottom: 15px;
+  border-bottom: none;
+}
+.ant-tabs-nav .ant-tabs-tab{
+  margin: 0 60px 0 0;
+}
+.ant-calendar-picker{
+  width: 100%;
+}
+.login-form-forgot{
+  display: block;
+  width: 100%;
+  text-align: right;
+}
+
+.content {
+	background-color: white;
+}

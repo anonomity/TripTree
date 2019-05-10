@@ -7,7 +7,7 @@ import './index.css';
 
 import './LoginFrom';
 import NormalLoginForm from "./LoginFrom";
-import NormalRegisterForm from "./RegisterForm"
+import RegistrationForm from "./register";
 
 const TabPane = Tabs.TabPane;
 const { Content, Sider } = Layout;
@@ -58,7 +58,7 @@ class AuthPage extends Component{
 							<h1 className="login_form_title">Login</h1>
 							<Tabs defaultActiveKey={!this.props.register ? '1' : '2'} onChange={(activeKey) => this.props.history.push(activeKey === '1' ? '/login' : '/register')}>
 								<TabPane tab="Sign in" key="1"><NormalLoginForm/></TabPane>
-								<TabPane tab="Register" key="2"><NormalRegisterForm/></TabPane>
+								<TabPane tab="Register" key="2"><RegistrationForm/></TabPane>
 							</Tabs>
 						</div>
 					</Content>

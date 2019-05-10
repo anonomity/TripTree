@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Menu, Icon, Layout } from 'antd';
+import { Tabs, Menu, Icon, Layout } from 'antd';
 import 'antd/dist/antd.css';
-
 import {
   Router,
   Switch,
@@ -9,39 +8,30 @@ import {
   Link,
   Redirect
 } from "react-router-dom";
-import history from './history';
-import logo from './logo.svg';
 import './App.css';
-import * as firebase from 'firebase';
 
-import AuthPage from './AuthPage/index';
-
-const firebaseConfig = {
-	apiKey: "AIzaSyBS9BUgNyS4jGKZEpeKArAnFPSOs5cpTCw",
-	authDomain: "triptree-39cc6.firebaseapp.com",
-	databaseURL: "https://triptree-39cc6.firebaseio.com",
-	projectId: "triptree-39cc6",
-	storageBucket: "triptree-39cc6.appspot.com",
-	messagingSenderId: "839167947552",
-	appId: "1:839167947552:web:d8c717db38af1c3f"
-  };
-firebase.initializeApp(firebaseConfig);
-
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
-const { Header, Content, Sider } = Layout;
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import UserPage from "./pages/UserPage";
+import PrivateRoute from "./PrivateRoute";
+import history from './history';
+import firebase_app from "./base";
 
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { 
 			current: history.location.pathname,
-			speed: 120,
+			authenticated: false,
+			loading: true,
+			currentUser: null,
+			reserved: true,
+			speed: 14,
 		};
 	}
 
 	componentDidMount() {
-		const roofRef = firebase.database().ref();
+		const roofRef = firebase_app.database().ref();
 		const speedRef = roofRef.child('speed');
 		speedRef.on('value', snap => {
 			this.setState({
@@ -49,51 +39,82 @@ class App extends Component {
 			});
 		});
 	}
-	
-	handleClick = (e) => {
-		this.setState({
-		  current: e.key,
+
+	componentWillMount() {
+		firebase_app.auth().onAuthStateChanged(user => {
+		  if (user) {
+			this.setState({
+			  authenticated: true,
+			  currentUser: user,
+			  loading: false,
+			  reserved: false
+			});
+		  } else {
+			this.setState({
+			  authenticated: false,
+			  currentUser: null,
+			  loading: false
+			});
+		  }
 		});
 	}
 
+	logOut() {
+		firebase_app.auth().signOut().then(function() {
+				alert("Sign-out successful.");
+				window.location.reload();
+			}).catch(function(error) {
+				alert(error);
+			});	  
+	} 
+
+	handleClick = (e) => {
+			this.setState({
+				current: e.key,
+			});
+	}
+
 	render() {
+		if (this.state.loading) {
+			return <p>Loading..</p>;
+		}
+
 		return (
+		<>
 		<Router history={history}>
-			<div className="page">
-				<Menu
-					onClick={this.handleClick}
-					selectedKeys={[this.state.current]}
-					mode="horizontal"
-					className='appMenu'
-				>
-					<Menu.Item key="/" className="menuItem">
-						<Link to="/"><Icon type="home" />Home page</Link>
-					</Menu.Item>
-					<Menu.Item key="/authors" className="menuItem">
-						<Icon type="team" />Authors
-					</Menu.Item>
-					<Menu.Item key="/articles" className="menuItem">
-						<Icon type="snippets" />Articles
-					</Menu.Item>
-					<Menu.Item key="/reviewers" className="menuItem">
-						<Icon type="solution" />Reviewers
-					</Menu.Item>
-					<Menu.Item key="/login" className="menuItem">
-						<Link to="/login"><Icon type="login" />Login</Link>
-					</Menu.Item>
-					<Menu.Item key="/user" className="menuItem">
-						<Icon type="user" />Username
-					</Menu.Item>
-				</Menu>
-				<Route exact path="/" />
-				<Route path="/login" component={AuthPage} />
-				
-				<h1>{this.state.speed}</h1>
-			</div>
+			<Menu
+				onClick={this.handleClick}
+				selectedKeys={this.current}
+				mode="horizontal"
+				className='appMenu'
+			>
+				<Menu.Item key="/" className="menuItem">
+					<Link to="/"><Icon type="home" />Home page</Link>
+				</Menu.Item>
+				<Menu.Item key="/userPage" className={this.state.reserved?'menuItem reserved':'menuItem'}>
+					<Link to="/UserPage"><Icon type="user" />User Page</Link>
+				</Menu.Item>
+				<Menu.Item key="/about" className="menuItem">
+					<Icon type="snippets" />About
+				</Menu.Item>
+				<Menu.Item key="/contact" className="menuItem">
+					<Icon type="solution" />Contact
+				</Menu.Item>
+				<Menu.Item key="/logout" onClick={this.logOut} className={this.state.reserved?'menuItem reserved':'menuItem'}>
+					<Icon type="logout" />Log Out
+				</Menu.Item>
+				<Menu.Item key="/login" className={this.state.reserved?'menuItem':'menuItem reserved'}>
+					<Link to="/LoginPage"><Icon type="login" />Login</Link>
+				</Menu.Item>
+			</Menu>
+
+			<Route exact path="/" component={HomePage} />
+			<Route exact path="/LoginPage" component={LoginPage} />
+			<PrivateRoute exact path="/UserPage" component={UserPage} authenticated={this.state.authenticated}/>
 		</Router>
+		</>
 		);
 	}
 }
-
 
 export default App;

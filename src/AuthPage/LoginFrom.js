@@ -2,23 +2,25 @@ import React, {Component} from 'react';
 import {Form, Icon, Input, Button, Modal} from 'antd';
 import 'antd/dist/antd.css';
 import NormalRestorePassword from "./RestorePassword";
-import {login} from '../connect/connectService';
-
+import firebase_app from "../base";
 
 const FormItem = Form.Item;
 
 class NormalLoginForm extends Component {
-    handleSubmit = (e) => {
-        e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                login(this.state.username, this.state.password).then(responseJson =>
-                    console.log(responseJson)
-                );
-                console.log('Received values of form: ', values);
-            }
-        });
+    handleSignIn = async event => {
+        event.preventDefault();
+        const { userName, password } = event.target.elements;
+        try {
+          const user = await firebase_app
+            .auth()
+            .signInWithEmailAndPassword(userName.value, password.value);
+            alert("You are now connected !");
+            this.state.user = userName.value;
+        } catch (error) {
+          alert(error);
+        }
     };
+
     state = {
         ModalText: '',
         visible: false,
@@ -63,7 +65,7 @@ class NormalLoginForm extends Component {
         const {getFieldDecorator} = this.props.form;
         return (
             <div>
-                <Form onSubmit={this.handleSubmit} className="login-form">
+                <Form onSubmit={this.handleSignIn} className="login-form">
                     <FormItem>
                         {getFieldDecorator('userName', {
                             rules: [{required: true, message: 'Please input your username!'}],

@@ -6,9 +6,14 @@ import {
   Switch,
   Route,
   Link,
-  Redirect
+  Redirect,
+  BrowserRouter,
 } from "react-router-dom";
 import './App.css';
+import { Container } from 'semantic-ui-react';
+import Mailbox from './components/Mailbox';
+import Login from './components/Login';
+import Register from './components/Register';
 
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
@@ -97,9 +102,15 @@ class App extends Component {
 				<Menu.Item key="/about" className="menuItem">
 					<Icon type="snippets" />About
 				</Menu.Item>
-				<Menu.Item key="/contact" className="menuItem">
+
+				{/* <Menu.Item key="/contact" className="menuItem">
 					<Icon type="solution" />Contact
+				</Menu.Item> */}
+
+				<Menu.Item key="/" className="menuItem">
+					<Link to="/"><Icon type="solution" />Contact</Link>
 				</Menu.Item>
+
 				<Menu.Item key="/logout" onClick={this.logOut} className={this.state.reserved?'menuItem reserved':'menuItem'}>
 					<Icon type="logout" />Log Out
 				</Menu.Item>
@@ -110,6 +121,11 @@ class App extends Component {
 
 			<Route exact path="/" component={HomePage} />
 			<Route exact path="/LoginPage" component={LoginPage} />
+			<Container style={{marginTop: '25px'}}>
+				<Route exact path="/inbox" component={Mailbox} />
+				<Route exact path="/" component={Login} />
+				<Route exact path="/register" component={Register} />
+			</Container>
 			<PrivateRoute exact path="/UserPage" component={UserPage} authenticated={this.state.authenticated}/>
 		</Router>
 		</>

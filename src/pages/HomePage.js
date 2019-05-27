@@ -24,7 +24,7 @@ class HomePage extends Component {
 				    <h1 style={{ color: 'white' }}>Discover places all around the world</h1>
                     <h3 style={{ color: 'white' }}>With the best tour guide of the city</h3>
                     <div className="HomeBox">
-                        <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)} />
+                    <div class="ui input"><input type="text" placeholder="Search..." /></div>
                     </div>
             </div>
         );

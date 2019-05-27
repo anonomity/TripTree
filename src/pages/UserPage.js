@@ -4,9 +4,9 @@ import {
   } from 'antd';
 import 'antd/dist/antd.css';
 import firebase_app from "../base";
+import TV from "../components/Trip_View";
 import TourGuidePage from './TourGuidePage';
 import TouristPage from './TouristPage';
-  
   const { Option } = Select;
   const AutoCompleteOption = AutoComplete.Option;
   

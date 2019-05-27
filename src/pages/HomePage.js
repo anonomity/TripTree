@@ -11,7 +11,7 @@ class HomePage extends Component {
 				    <h1>Discover places all around the world</h1>
                     <h3>With the best tour guide of the city</h3>
                     <div className="HomeBox">
-                        <input type="text" value="" />
+                    <div class="ui input"><input type="text" placeholder="Search..." /></div>
                     </div>
             </div>
         );

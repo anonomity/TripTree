@@ -28,6 +28,20 @@ class Login extends Component {
     }
 
     login = () => {
+        firebase
+                .firestore()
+                .collection("users")
+                .get()
+                .then(querySnapshot => {
+                    querySnapshot.forEach(function (doc) {
+                        if (doc.exists) {
+                            localStorage.setItem('user-type', doc.data().type);
+                        }
+                    });
+                })
+                .catch(function (error) {
+                    console.log("Error getting documents: ", error);
+                });
         if (this.state.email && this.state.password) {
             this.setState({
                 loading: true

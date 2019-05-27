@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Form } from 'semantic-ui-react';
+import { Button, Form, Checkbox } from 'semantic-ui-react';
 import firebase from '../config/firebase';
 import {
     Link
@@ -14,7 +14,8 @@ class Login extends Component {
             password: '',
             loading: false,
             userEmail: null,
-            error: null
+            error: null,
+            tourGuide: false
         }
     }
     componentDidMount() {
@@ -29,6 +30,7 @@ class Login extends Component {
     }
 
     login = () => {
+        const newId = Math.random() * 100000000;
         if (this.state.email && this.state.password) {
             this.setState({
                 loading: true
@@ -37,19 +39,23 @@ class Login extends Component {
                 this.state.email,
                 this.state.password
             ).then((result) => {
+                console.log(result)
                 this.setState({
                     loading: false,
                     userEmail: result.user.email,
                     error: null
                 });
-                this.ref.add({
-                    email: result.user.email
+                firebase.firestore().collection('users').doc(`${newId}`).set({
+                    email: result.user.email,
+                    type: this.state.tourGuide
                 }).then((cevap) => {
                     console.log('Cevap', cevap);
+                    localStorage.setItem('clientId', newId)
                 }).catch((err) => {
                     console.error(err.message);
                 })
                 localStorage.setItem('user', this.state.email);
+                localStorage.setItem('user-type', this.state.tourGuide);
                 this.props.history.push('/inbox');
                 console.log(result)
             }).catch((err) => {
@@ -81,6 +87,8 @@ class Login extends Component {
                 {
                     this.state.error ? this.state.error : null
                 }
+                <Checkbox checked={this.state.tourGuide} onChange={() => this.setState({ tourGuide: !this.state.tourGuide })} label="Tour Guide" />
+                {this.state.tourGuide ? 'Type: TourGuide' : 'Type: Tourist'}
             </Form>
             </React.Fragment>
         )

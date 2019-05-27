@@ -16,8 +16,9 @@ import TouristPage from './TouristPage';
       return (
         localStorage.getItem('user-type') === true || localStorage.getItem('user-type') === 'tour-guide' ?
         <TourGuidePage />
-        : 
-        <TouristPage />
+        :
+        <TV />
+        
       )
     }
   }

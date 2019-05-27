@@ -13,6 +13,7 @@ import firebase_app from "../base";
     state = {
       confirmDirty: false,
       autoCompleteResult: [],
+      isTourGuide: false
     };
   
     handleSignUp = async event => {
@@ -21,8 +22,18 @@ import firebase_app from "../base";
       try {
         const user = await firebase_app
           .auth()
-          .createUserWithEmailAndPassword(register_email.value, register_password.value);
-          alert("Your account is now registered !");
+          .createUserWithEmailAndPassword(register_email.value, register_password.value).then((result) => {
+            firebase_app.firestore().collection('users').add({
+              email: register_email.value,
+              type: this.state.isTourGuide ? 'tour-guide' : 'user'
+            }).then((res) => {
+              console.log(res.data);
+              localStorage.setItem('user-type', this.state.isTourGuide);
+            })
+            .catch(err => {
+              console.error(err.message);
+            })
+          })
       } catch (error) {
         alert(error);
       }
@@ -40,6 +51,12 @@ import firebase_app from "../base";
       } else {
         callback();
       }
+    }
+
+    handleTourGuide = () => {
+      this.setState({
+        isTourGuide: !this.state.isTourGuide
+      });
     }
   
     validateToNextPassword = (rule, value, callback) => {
@@ -142,9 +159,17 @@ import firebase_app from "../base";
               <Checkbox>I have read the <a href="">agreement</a></Checkbox>
             )}
           </Form.Item>
+
+          <Form.Item {...tailFormItemLayout}>
+              <Checkbox name="isTourGuide" checked={this.state.isTourGuide} onChange={this.handleTourGuide}>Tour Guide</Checkbox>
+              {<span>{this.state.isTourGuide ? 'true' : 'false'}</span>}
+          </Form.Item>
+
+
           <Form.Item {...tailFormItemLayout}>
             <Button type="primary" htmlType="submit">Register</Button>
           </Form.Item>
+          
         </Form>
       );
     }

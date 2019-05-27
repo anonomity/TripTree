@@ -19,6 +19,7 @@ import TV from './components/Trip_View';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import UserPage from "./pages/UserPage";
+import AboutPage from "./pages/AboutPage";
 import PrivateRoute from "./PrivateRoute";
 import history from './history';
 import firebase_app from "./base";
@@ -95,37 +96,28 @@ class App extends Component {
 				className='appMenu'
 			>
 				<Menu.Item key="/" className="menuItem">
-					<Link to="/"><Icon type="home" />Home page</Link>
+					<Link to="/homepage"><Icon type="home" />Home page</Link>
 				</Menu.Item>
+
 				<Menu.Item key="/userPage" className={this.state.reserved?'menuItem reserved':'menuItem'}>
 					<Link to="/UserPage"><Icon type="user" />User Page</Link>
 				</Menu.Item>
-				<Menu.Item key="/about" className="menuItem">
-					<Icon type="snippets" />About
+				
+				<Menu.Item key="/AboutPage" className="menuItem">
+					<Link to="/AboutPage" ><Icon type="user" />About Page </Link>
 				</Menu.Item>
-
-				{/* <Menu.Item key="/contact" className="menuItem">
-					<Icon type="solution" />Contact
-				</Menu.Item> */}
-
+				
 				<Menu.Item key="/" className="menuItem">
-					<Link to="/"><Icon type="solution" />Contact</Link>
-				</Menu.Item>
-
-				<Menu.Item key="/logout" onClick={this.logOut} className={this.state.reserved?'menuItem reserved':'menuItem'}>
-					<Icon type="logout" />Log Out
-				</Menu.Item>
-				<Menu.Item key="/login" className={this.state.reserved?'menuItem':'menuItem reserved'}>
-					<Link to="/LoginPage"><Icon type="login" />Login</Link>
+					<Link to="/"><Icon type="inbox" />Inbox</Link>
 				</Menu.Item>
 			</Menu>
 
-			<Route exact path="/" component={HomePage} />
-			<Route exact path="/LoginPage" component={LoginPage} />
+			<Route exact path="/homepage" component={HomePage} />
+			<Route exact path="/AboutPage" component={AboutPage} />
+			<Route exact path="/" component={Login} />
 			<Container style={{marginTop: '25px'}}>
 				<Route exact path="/TV" component={TV} />
 				<Route exact path="/inbox" component={Mailbox} />
-				<Route exact path="/" component={Login} />
 				<Route exact path="/register" component={Register} />
 				
 			</Container>

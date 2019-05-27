@@ -10,6 +10,8 @@ class TabExampleCustomMenuItem extends React.Component {
 
     logout = () => {
         localStorage.removeItem('user');
+        localStorage.removeItem('user-type');
+        localStorage.removeItem('clientId');
         this.props.history.push('/');
     }
 

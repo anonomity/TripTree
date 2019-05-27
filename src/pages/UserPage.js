@@ -5,20 +5,20 @@ import {
 import 'antd/dist/antd.css';
 import firebase_app from "../base";
 import TV from "../components/Trip_View";
-
-
+import TourGuidePage from './TourGuidePage';
+import TouristPage from './TouristPage';
   const { Option } = Select;
   const AutoCompleteOption = AutoComplete.Option;
   
   class UserPage extends Component {
+
     render() {
       return (
-        <form class = "ui form">
-          <div>
-              <TV/>
-          </div>
-        </form>
-        );
+        localStorage.getItem('user-type') === true || localStorage.getItem('user-type') === 'tour-guide' ?
+        <TourGuidePage />
+        : 
+        <TouristPage />
+      )
     }
   }
   

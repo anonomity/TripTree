@@ -13,13 +13,11 @@ import profilePicture from '../images/default_profile_picture.jpg';
     state = {
       confirmDirty: false,
       autoCompleteResult: [],
-      userEmail: "",
-      userPhoneNumber: "",
-      userType: "",
+      userInfos: [],
     };
 
     getUserData = () => {
-      let ref = firebase_app.database().ref('users');
+      let ref = firebase_app.database().ref('triptree-39cc6').child('users').child('rrvRtgOgZIIC4Y6VIKKE');
       ref.on('value', snapshot => {
         const state = snapshot.val();
         this.setState(state);
@@ -73,7 +71,7 @@ import profilePicture from '../images/default_profile_picture.jpg';
   
     render() {
       const { getFieldDecorator } = this.props.form;
-      const { autoCompleteResult } = this.state;
+      const { user } = this.state.userInfos;
   
       const formItemLayout = {
         labelCol: {
@@ -109,9 +107,9 @@ import profilePicture from '../images/default_profile_picture.jpg';
       return (
         <>
           <div id="userPageHeader">
-            <img src={profilePicture} alt="Profile picture" />
-            <h1>{this.state.currentUser}</h1>
-            <h3>Wroclaw, Poland</h3>
+            <img src={profilePicture} alt="Profile picture" id="userProfilePicture" />
+            <h1 id="userName">User Name</h1>
+            <h3 id="userLocation">Wroclaw, Poland</h3>
 
             <p>Ready to explore new city...</p>
           </div>
@@ -122,7 +120,7 @@ import profilePicture from '../images/default_profile_picture.jpg';
                     <li>Email : <input value={firebase_app.auth().currentUser.email} /></li>
                     <li>Phone number : <input value={firebase_app.auth().currentUser.phoneNumber} /></li>
                     <li>Country : <input value={firebase_app.database().ref().child('triptree-39cc6').child('users/').child('rrvRtgOgZIIC4Y6VIKKE/').email} /></li>
-                    <li>City : <input value={this.state.userEmail} /></li>
+                    <li>City : <input value={this.state.userInfos} /></li>
                     <li>Age : <input value="" /></li>
                     <li>Sexe : <input value="" /></li>
                     <li>Language spoken : <input value="" /></li>
@@ -130,67 +128,6 @@ import profilePicture from '../images/default_profile_picture.jpg';
                 </ul>
             </Form>
           </div>
-
-          <Form {...formItemLayout} onSubmit={this.handleSignUp}>
-            <Form.Item
-              label="email"
-            >
-              {getFieldDecorator('email', {
-                rules: [{
-                  type: 'email', message: 'The input is not valid E-mail!',
-                }, {
-                  required: true, message: 'Please input your E-mail!',
-                }],
-              })(
-                <Input />
-              )}
-            </Form.Item>
-            <Form.Item
-              label="password"
-            >
-              {getFieldDecorator('password', {
-                rules: [{
-                  required: true, message: 'Please input your password!',
-                }, {
-                  validator: this.validateToNextPassword,
-                }],
-              })(
-                <Input type="password" />
-              )}
-            </Form.Item>
-            <Form.Item
-              label="Confirm Password"
-            >
-              {getFieldDecorator('confirm', {
-                rules: [{
-                  required: true, message: 'Please confirm your password!',
-                }, {
-                  validator: this.compareToFirstPassword,
-                }],
-              })(
-                <Input type="password" onBlur={this.handleConfirmBlur} />
-              )}
-            </Form.Item>
-            <Form.Item
-              label="Phone Number"
-            >
-              {getFieldDecorator('phone', {
-                rules: [{ required: true, message: 'Please input your phone number!' }],
-              })(
-                <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
-              )}
-            </Form.Item>
-            <Form.Item {...tailFormItemLayout}>
-              {getFieldDecorator('agreement', {
-                valuePropName: 'checked',
-              })(
-                <Checkbox>I have read the <a href="">agreement</a></Checkbox>
-              )}
-            </Form.Item>
-            <Form.Item {...tailFormItemLayout}>
-              <Button type="primary" htmlType="submit">Register</Button>
-            </Form.Item>
-          </Form>
         </>
       );
     }

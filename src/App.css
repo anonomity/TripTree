@@ -35,3 +35,39 @@
 .reserved {
   display: none !important;
 }
+
+#userPageHeader {
+  background-image: url("images/headerProfile.jpg") !important;
+  height: 240px;
+  color: white;
+}
+
+#userPageHeader h1, #userPageHeader h3 {
+  color: white;
+}
+
+#userProfilePicture {
+  float: left;
+  margin: 20px;
+}
+
+#user_info {
+  float: left;
+  margin-top: 60px;
+  margin-left: 150px;
+}
+
+#user_info ul {
+  list-style: none;
+  font-size: 17px;
+}
+
+#user_info li {
+  margin-top: 14px;
+}
+
+#user_info li input {
+  width: 300px;
+  height: 30px;
+  border-radius: 3px;
+}

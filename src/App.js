@@ -19,6 +19,8 @@ import TV from './components/Trip_View';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import UserPage from "./pages/UserPage";
+import GuideProfilePage from "./pages/TourGuidePage";
+import TouristProfilePage from "./pages/TouristPage";
 import AboutPage from "./pages/AboutPage";
 import PrivateRoute from "./PrivateRoute";
 import history from './history';
@@ -102,6 +104,10 @@ class App extends Component {
 				<Menu.Item key="/userPage" className={this.state.reserved?'menuItem reserved':'menuItem'}>
 					<Link to="/UserPage"><Icon type="user" />User Page</Link>
 				</Menu.Item>
+
+				<Menu.Item key="/profilePage" className={this.state.reserved?'menuItem reserved':'menuItem'}>
+					<Link to="/ProfilePage"><Icon type="user" />Profile Page</Link>
+				</Menu.Item>
 				
 				<Menu.Item key="/AboutPage" className="menuItem">
 					<Link to="/AboutPage" ><Icon type="user" />About Page </Link>
@@ -109,6 +115,10 @@ class App extends Component {
 				
 				<Menu.Item key="/" className="menuItem">
 					<Link to="/"><Icon type="inbox" />Inbox</Link>
+				</Menu.Item>
+
+				<Menu.Item key="/logout" onClick={this.logOut} className={this.state.reserved?'menuItem reserved':'menuItem'}>
+					<Icon type="logout" />Log Out
 				</Menu.Item>
 			</Menu>
 
@@ -122,6 +132,7 @@ class App extends Component {
 				
 			</Container>
 			<PrivateRoute exact path="/UserPage" component={UserPage} authenticated={this.state.authenticated}/>
+			<PrivateRoute exact path="/ProfilePage" component={GuideProfilePage} authenticated={this.state.authenticated}/>
 		</Router>
 		</>
 		);

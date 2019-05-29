@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import { Form, Input, Select, Checkbox, Button, AutoComplete } from 'antd';
 import 'antd/dist/antd.css';
 import firebase_app from "../base";
-
+import tour1 from '../images/tour1.PNG';
+import tour2 from '../images/tour2.PNG';
 import profilePicture from '../images/default_profile_picture.jpg';
+import './page.css';
   
   const { Option } = Select;
   const AutoCompleteOption = AutoComplete.Option;
@@ -124,7 +126,12 @@ import profilePicture from '../images/default_profile_picture.jpg';
                     <li>Age : <input value="" /></li>
                     <li>Sexe : <input value="" /></li>
                     <li>Language spoken : <input value="" /></li>
+                    <li>Trips </li>
+                    <img class ="resize" src={tour1} alt="tour1" />
+                    <img class ="resize" src={tour2} alt="tour2" />
+                    <li><input type="submit" value="Add More Trips" /></li>
                     <li><input type="submit" value="Save informations" /></li>
+                    
                 </ul>
             </Form>
           </div>

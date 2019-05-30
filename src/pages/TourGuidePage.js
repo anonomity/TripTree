@@ -165,7 +165,7 @@ import logo from '../images/logo.png';
                   <Link to="/HomePage" ><Icon type="user" />Home Page | </Link>
                   <Link to="/UserPage" ><Icon type="user" /> User Page | </Link>
                   <Link to="/AboutPage" ><Icon type="user" /> About Page | </Link>
-                  <Link to="/TourGuidePage" ><Icon type="user" /> Profile Page | </Link>
+                  <Link to="/ProfilePage" ><Icon type="user" /> Profile Page | </Link>
                 </Menu.Item>
                 </p>
           </div>

@@ -62,12 +62,14 @@ class HomePage extends Component {
                     <h3 style={{ color: 'black' }}>With the best tour guide of the city</h3>
                     </header>
             <div class="ui input"><input type="text" placeholder="Search..." /></div>
+            <div>
             <button onClick={this.toggleModal}>
               Search by Tour
             </button>
             <button onClick={this.toggleModal2}>
               Search by Profile
             </button>
+            </div>
             <Modal show={this.state.isOpen}
               onClose={this.toggleModal}>
                    <header>
@@ -86,39 +88,54 @@ class HomePage extends Component {
             <Modal show={this.state.isOpen2}
               onClose={this.toggleModal2}>
                    <header>
-                    <h1 style={{ color: 'black' }}>Profiles</h1>
+                    <h1 style={{ color: 'black' }}>Tour Guide Profiles</h1> 
                    
                     </header>
+                    <div class="five">
                     <img class ="resize2" src={pp1} alt="pp1" />
+                    <div>
+                      
+                      <table>
+                        <caption>like this guide?</caption>
+                        <tr>
+                          <th>Name</th>
+                          <th>Szymon Marianski </th>
+                        </tr>
+                        <tr>
+                          <td>Languages   </td>
+                          <td>Polish, English, and German</td>
+                        </tr>
+                        <tr>
+                          <td>From    </td>
+                          <td>Poland</td>
+                        </tr>
+                      </table>
+                      <input type="submit" value="View Profile" />
+                    </div>
+                    </div>
+                    <div class = "five">
                     <img class ="resize2" src={pp2} alt="pp2" />
-              </Modal>
-                <br />
-                <h1 class="lineDikey"
-                    style={{ fontSize:'18px',color: '#696969'}} 
-                    className="inlineS">
-                    Contact With Us
-                    <ul>
-                        <li>EXETER, ON (Head Office)</li>
-                        <li> 311 Main St., PO Box 1990, N0M 1S7 </li>
-                        <li>519-235-2000</li>
-                        <h1 style={{ color: '#696969'}} className = "spaceTop">
-                            <img style={{fontSize:'2'}} src={logo} alt="Logo"/>
-                            Traveling with ease
-                        </h1> 
-                    </ul>
-                </h1>
-                <br />
-                <p 
-                    style={{backgroundColor: 'black',fontSize:20 ,padding: 1}} 
-                    className="footer"
-                >
-                <Menu.Item >
-                  <Link to="/HomePage" ><Icon type="user" />Home Page | </Link>
-                  <Link to="/UserPage" ><Icon type="user" /> User Page | </Link>
-                  <Link to="/AboutPage" ><Icon type="user" /> About Page | </Link>
-                  <Link to="/TourGuidePage" ><Icon type="user" /> Profile Page | </Link>
-                </Menu.Item>
-                </p>
+                    <div>
+                    <table>
+                        <caption>like this guide?</caption>
+                        <tr>
+                          <th>Name</th>
+                          <th>Mateusz Kryja </th>
+                        </tr>
+                        <tr>
+                          <td>Languages   </td>
+                          <td>Polish, English</td>
+                        </tr>
+                        <tr>
+                          <td>From    </td>
+                          <td>Poland</td>
+                        </tr>
+                      </table>
+                    </div>
+                    </div>
+
+              
+            </Modal>
           </div>
         );
     }

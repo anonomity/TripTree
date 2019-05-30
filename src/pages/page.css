@@ -16,3 +16,10 @@
     width: 250px;
     height: auto;
   }
+
+  .five {
+    border-style: double;
+    border-width: 15px;
+    background-color: lightgrey;
+    border-radius: 5px;
+  }

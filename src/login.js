@@ -48,10 +48,7 @@ class App extends Component {
 		<Menu.Item key="login">
           <Icon type="login" />Login
         </Menu.Item>
-      </Menu>
-	  
-	  Hello World
-	  
+      </Menu>	  
     );
   }
 }

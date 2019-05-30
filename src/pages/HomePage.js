@@ -128,6 +128,7 @@ class HomePage extends Component {
                           <td>Poland</td>
                         </tr>
                       </table>
+                      <input type="submit" value="View Profile" />
                     </div>
                     </div>
 

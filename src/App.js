@@ -15,7 +15,6 @@ import { Container } from 'semantic-ui-react';
 import Mailbox from './components/Mailbox';
 import Login from './components/Login';
 import Register from './components/Register';
-import TV from './components/Trip_View';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import UserPage from "./pages/UserPage";
@@ -116,10 +115,9 @@ class App extends Component {
 			<Route exact path="/AboutPage" component={AboutPage} />
 			<Route exact path="/" component={Login} />
 			<Container style={{marginTop: '25px'}}>
-				<Route exact path="/TV" component={TV} />
+				<Route exact path="/AboutPage" component={AboutPage} />
 				<Route exact path="/inbox" component={Mailbox} />
 				<Route exact path="/register" component={Register} />
-				
 			</Container>
 			<PrivateRoute exact path="/UserPage" component={UserPage} authenticated={this.state.authenticated}/>
 		</Router>

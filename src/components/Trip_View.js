@@ -1,129 +1,87 @@
-import React, { Component } from 'react';
-import {  Label } from 'semantic-ui-react'
-import {DropdownButton,Dropdown,Form} from 'react-bootstrap';
-import { Container, Row, Col } from 'reactstrap';
+import React from 'react'
+import { Table ,Dropdown } from 'semantic-ui-react'
+import './Trip_View.css'
 
+const Tourist = [
+    {
+      key: 'Jenny Hess',
+      text: 'Jenny Hess',
+      value: 'Jenny Hess',
+    },
+    {
+      key: 'Elliot Fu',
+      text: 'Elliot Fu',
+      value: 'Elliot Fu',
+    },
+    {
+      key: 'Stevie Feliciano',
+      text: 'Stevie Feliciano',
+      value: 'Stevie Feliciano',
+    },
+    {
+      key: 'Christian',
+      text: 'Christian',
+      value: 'Christian',
+    },
+    {
+      key: 'Matt',
+      text: 'Matt',
+      value: 'Matt',
+    },
+    {
+      key: 'Justen Kitsune',
+      text: 'Justen Kitsune',
+      value: 'Justen Kitsune',
+    },
+  ]
 
-const regionDisplay = {
-    'Mickey Family'         : ['India', 'pp1'],
-    'Fuat Family'           : ['Turkey', 'pp2'],
-    'Jackie with her Gang'  : ['Miami', 'pp3'],
-    'Patrycja with friends' : ['Poznan', 'pp4'],
-    'Anna with friends'     : ['Poznan', 'pp5'],
-    'Chanchal family'   	: ['India', 'pp6'],
-    'Pierre Payet family '  : ['France', 'pp7'],
-}
+const T_V = () => (
+    <div className = "Box" >
+                <div className="trip-text">
+                    <h1> Trip View </h1><br/>
+                </div>
+        <Dropdown placeholder='Select...' fluid selection options={Tourist} />
+    <br/><br/><br/><br/>
+    <Table padded singleLine inverted celled selectable > 
+        <Table.Header >
+        <Table.Row>
+            <Table.HeaderCell>Number</Table.HeaderCell>
+            <Table.HeaderCell>Name</Table.HeaderCell>
+            <Table.HeaderCell>Tour Date</Table.HeaderCell>
+            <Table.HeaderCell>From</Table.HeaderCell>
+            <Table.HeaderCell>To</Table.HeaderCell>
+            <Table.HeaderCell>Status</Table.HeaderCell>
+        </Table.Row>
+        </Table.Header>
 
-const AwsRegion = ({region, onSelect}) => (
-    <Form inline>
-        <DropdownButton bsStyle="default" id="aws-region" onSelect={onSelect} title={region}>
-            {Object.keys(regionDisplay).map(region => <Dropdown.Item key={region} eventKey={region}> {region} - {regionDisplay[region][0]}  </Dropdown.Item>)}
-        </DropdownButton>
-    </Form>
-
+        <Table.Body>
+        <Table.Row>
+            <Table.Cell>1</Table.Cell>
+            <Table.Cell>John Lilki</Table.Cell>
+            <Table.Cell>September 14, 2013</Table.Cell>
+            <Table.Cell>Wroclaw</Table.Cell>
+            <Table.Cell>Warsaw</Table.Cell>
+            <Table.Cell positive>Completed</Table.Cell>
+        </Table.Row>
+        <Table.Row>
+            <Table.Cell>2</Table.Cell>
+            <Table.Cell>Jamie Harington</Table.Cell>
+            <Table.Cell>January 11, 2014</Table.Cell>
+            <Table.Cell>Wroclaw</Table.Cell>
+            <Table.Cell>Krakow</Table.Cell>
+            <Table.Cell positive>Completed</Table.Cell>
+        </Table.Row>
+        <Table.Row>
+            <Table.Cell>3</Table.Cell>
+            <Table.Cell>Jill Lewis</Table.Cell>
+            <Table.Cell>May 39, 2019</Table.Cell>
+            <Table.Cell>Wroclaw</Table.Cell>
+            <Table.Cell>Lublin</Table.Cell>
+            <Table.Cell warning>Happening</Table.Cell>
+        </Table.Row>
+        </Table.Body>
+    </Table>
+    </div>
 );
 
-const ValueRow = ({Series_Num, value, To, Status, onChange}) => (
-    <Container>
-        <div className="">
-            <Label bsClass="col-sm-3 text-left">{Series_Num}</Label>
-            <div className="col-sm-3">
-                <form className="form-inline">
-                    <div className="form-group">
-                        <div className="input-group">
-                            <input type="text" readonly class="form-control-plaintext" className="form-control text-center" onChange={onChange} value={value} disabled/>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <Label bsClass="col-sm-3 text-center">{To}</Label>
-            <Label bsClass="col-sm-3 text-center">{Status}</Label>
-        </div>
-    </Container>
-);
-
-
-const transparentBg = { background: 'transparent'}
-
-class TV extends Component {
-
-    constructor() {
-        super()
-        this.state = { region: Object.keys(regionDisplay)[0],  postPutRequests: 10, getRequests:100}
-    }
-
-    handleDataSize(e) {
-        e.preventDefault();
-        this.setState({dataSize: e.target.value});
-    }
-
-    handlePostRequest(e) {
-        e.preventDefault();
-        this.setState({postPutRequests: e.target.value});
-    }
-
-    handleGetRequest(e) {
-        e.preventDefault();
-        this.setState({getRequests: e.target.value});
-    }
-
-    handleRegion(region, e) {
-        this.setState({region: region});
-    }
-
-
-
-render() {
-    return (
-            <div className="SHIT">
-                <div className="page-header">
-                    <h3> Trip Tree's </h3>
-                    <h4> <small> TRIP - Mickey </small> </h4>
-                </div>
-
-                <AwsRegion region={this.state.region} onSelect={(key, e) => this.handleRegion(key, e)} />
-
-                <div className="jumbotron col-sm-10 col-sm-offset-1" style={transparentBg} >
-                    <div className="panel panel-primary">
-                        <div className="panel-heading">
-                            <Row>
-                                <Col > <Label bsClass="col-sm-3 text-left" >Number </Label> </Col>
-                                <Col > <Label bsClass="col-sm-3 text-center" > From </Label> </Col>
-                                <Col > <Label bsClass="col-sm-3 text-center"> To  </Label> </Col>
-                                <Col > <Label bsClass="col-sm-3 text-center"> Status </Label> </Col>
-                            </Row>
-                        </div>
-
-                        <div className="panel-body">
-                            <ValueRow Series_Num="1" 
-                                value={"Wroclaw"} 
-                                To={"warsaw"} 
-                                Status={"Completed" }
-                            />
-
-                            <ValueRow Series_Num="2"  
-                                value={"Hell"}
-                                To={"Poznan" } 
-                                Status={"Completed"}
-                            />
-
-                            <ValueRow Series_Num="3" 
-                                value={"Gadsank"}
-                                To={"Krakow"} 
-                                Status={"In Process" }
-                            />
-
-                            <ValueRow Series_Num="4" 
-                                value={"Wroclaw"}
-                                To= "Lublin" 
-                                Status={"Planning" }
-							/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-}
-
-export default TV;
+export default T_V;

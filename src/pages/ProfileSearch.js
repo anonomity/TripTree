@@ -5,7 +5,7 @@ import 'antd/dist/antd.css';
 
 class ProfileSearch extends Component {
     render() {
-        return (<div>Tourist Page</div>
+        return (<div style={{ color: 'black' }}>Tourist Page</div>
 
         );
     }

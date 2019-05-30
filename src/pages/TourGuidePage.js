@@ -6,7 +6,14 @@ import tour1 from '../images/tour1.PNG';
 import tour2 from '../images/tour2.PNG';
 import profilePicture from '../images/default_profile_picture.jpg';
 import './page.css';
-  
+import { Label, Menu, Tab, Icon,  Loader } from 'semantic-ui-react';
+import {
+  Router,
+  Route,
+  Link,BrowserRouter
+} from "react-router-dom";
+import logo from '../images/logo.png';
+
   const { Option } = Select;
   const AutoCompleteOption = AutoComplete.Option;
   const FormItem = Form.Item;
@@ -134,6 +141,33 @@ import './page.css';
                     
                 </ul>
             </Form>
+            <br />
+                <h1 class="lineDikey"
+                    style={{ fontSize:'18px',color: '#696969'}} 
+                    className="inlineS">
+                    Contact With Us
+                    <ul>
+                        <li>EXETER, ON (Head Office)</li>
+                        <li> 311 Main St., PO Box 1990, N0M 1S7 </li>
+                        <li>519-235-2000</li>
+                        <h1 style={{ color: '#696969'}} className = "spaceTop">
+                            <img style={{fontSize:'2'}} src={logo} alt="Logo"/>
+                            Traveling with ease
+                        </h1> 
+                    </ul>
+                </h1>
+                <br />
+                <p 
+                    style={{backgroundColor: 'black',fontSize:20 ,padding: 1}} 
+                    className="footer"
+                >
+                <Menu.Item >
+                  <Link to="/HomePage" ><Icon type="user" />Home Page | </Link>
+                  <Link to="/UserPage" ><Icon type="user" /> User Page | </Link>
+                  <Link to="/AboutPage" ><Icon type="user" /> About Page | </Link>
+                  <Link to="/TourGuidePage" ><Icon type="user" /> Profile Page | </Link>
+                </Menu.Item>
+                </p>
           </div>
         </>
       );

@@ -15,6 +15,9 @@ import tour2 from '../images/tour2.PNG';
 import tour3 from '../images/tour3.PNG';
 import pp1 from '../images/pp1.jpg';
 import pp2 from '../images/pp2.jpg';
+import { Label, Menu, Tab, Icon, Button, Loader } from 'semantic-ui-react';
+import logo from '../images/logo.png';
+
 const { Content } = Layout;
 
 class HomePage extends Component {
@@ -135,14 +138,6 @@ class HomePage extends Component {
               
             </Modal>
           </div>
-                
-                   
-
-                   
-                        
-                        
-      
-           
         );
     }
 }

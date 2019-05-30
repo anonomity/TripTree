@@ -6,7 +6,10 @@ import logo from '../images/logo.png';
 import backgroundImage from '../images/wroclaw.jpg';
 import './AboutPage.css';
 import guys from '../images/guys.jpg';
-import plane from '../images/plane.jpg';
+import {
+    Link
+  } from "react-router-dom";
+
 
 const { Content } = Layout;
 console.log(logo);
@@ -110,13 +113,15 @@ class AboutPage extends Component {
                 </h1>
                 <br />
                 <p 
-                    style={{backgroundColor: 'black',fontSize:20 ,padding: 2}} 
+                    style={{backgroundColor: 'black',fontSize:20 ,padding: 1}} 
                     className="footer"
                 >
-                    <a href="./pages/HomePage.js"> Home Page</a>
-                    <a href="./pages/UserPage.js"> |    User Page</a>
-                    <a href="./pages/TourGuidePage.js">  |   Profile Page </a>
-                    <a href="./pages/AboutPage.js"> |    About Page</a>
+                <Menu.Item >
+					<Link to="/HomePage" ><Icon type="user" />Home Page | </Link>
+					<Link to="/UserPage" ><Icon type="user" /> User Page | </Link>
+					<Link to="/AboutPage" ><Icon type="user" /> About Page | </Link>
+					<Link to="/TourGuidePage" ><Icon type="user" /> Profile Page | </Link>
+				</Menu.Item>
                 </p>
             </React.Fragment>
         );

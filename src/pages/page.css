@@ -1,0 +1,25 @@
+
+  
+  .resize {
+    width: 300px;
+    height: auto;
+  }
+  
+  /* .header-img {
+    width: 100%;
+    height: 400px;
+    background: url('');
+    background-size: cover;
+  } */
+
+  .resize2 {
+    width: 250px;
+    height: auto;
+  }
+
+  .five {
+    border-style: double;
+    border-width: 15px;
+    background-color: lightgrey;
+    border-radius: 5px;
+  }

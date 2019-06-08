@@ -1,0 +1,12 @@
+.Box{
+    position:fixed;
+    top: 20%;
+    left: 30%;
+    width:80em;
+    height:50em;
+    margin-top: -9em; /*set to a negative number 1/2 of your height*/
+    margin-left: -15em; /*set to a negative number 1/2 of your width*/
+}
+.trip-text{
+    text-align: center;
+}

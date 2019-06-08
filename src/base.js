@@ -1,13 +1,17 @@
 import firebase from "firebase";
 
-const firebase_app = firebase.initializeApp({
-	apiKey: "AIzaSyBS9BUgNyS4jGKZEpeKArAnFPSOs5cpTCw",
-	authDomain: "triptree-39cc6.firebaseapp.com",
-	databaseURL: "https://triptree-39cc6.firebaseio.com",
-	projectId: "triptree-39cc6",
-	storageBucket: "triptree-39cc6.appspot.com",
-	messagingSenderId: "839167947552",
-	appId: "1:839167947552:web:d8c717db38af1c3f"
-  });
+try {
+	firebase.initializeApp({
+	databaseURL: 'dfgdfg'
+	})
+	} catch (err) {
+	// we skip the "already exists" message which is
+	// not an actual error when we're hot-reloading
+	if (!/already exists/.test(err.message)) {
+	console.error('Firebase initialization error', err.stack)
+	}
+	}
+	
+	const fb= firebase
 
-  export default firebase_app;
+	export default firebase;

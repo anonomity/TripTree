@@ -6,13 +6,21 @@ import {
   Switch,
   Route,
   Link,
-  Redirect
+  Redirect,
+  BrowserRouter,
 } from "react-router-dom";
 import './App.css';
-
+import './components/Trip_View.css'
+import { Container } from 'semantic-ui-react';
+import Mailbox from './components/Mailbox';
+import Login from './components/Login';
+import Register from './components/Register';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import UserPage from "./pages/UserPage";
+import GuideProfilePage from "./pages/TourGuidePage";
+import TouristProfilePage from "./pages/TouristPage";
+import AboutPage from "./pages/AboutPage";
 import PrivateRoute from "./PrivateRoute";
 import history from './history';
 import firebase_app from "./base";
@@ -89,28 +97,40 @@ class App extends Component {
 				className='appMenu'
 			>
 				<Menu.Item key="/" className="menuItem">
-					<Link to="/"><Icon type="home" />Home page</Link>
+					<Link to="/homepage"><Icon type="home" />Home page</Link>
 				</Menu.Item>
+
 				<Menu.Item key="/userPage" className={this.state.reserved?'menuItem reserved':'menuItem'}>
 					<Link to="/UserPage"><Icon type="user" />User Page</Link>
 				</Menu.Item>
-				<Menu.Item key="/about" className="menuItem">
-					<Icon type="snippets" />About
+
+				<Menu.Item key="/profilePage" className={this.state.reserved?'menuItem reserved':'menuItem'}>
+					<Link to="/ProfilePage"><Icon type="user" />Profile Page</Link>
 				</Menu.Item>
-				<Menu.Item key="/contact" className="menuItem">
-					<Icon type="solution" />Contact
+				
+				<Menu.Item key="/AboutPage" className="menuItem">
+					<Link to="/AboutPage" ><Icon type="user" />About Page </Link>
 				</Menu.Item>
+				
+				<Menu.Item key="/" className="menuItem">
+					<Link to="/"><Icon type="inbox" />Inbox</Link>
+				</Menu.Item>
+
 				<Menu.Item key="/logout" onClick={this.logOut} className={this.state.reserved?'menuItem reserved':'menuItem'}>
 					<Icon type="logout" />Log Out
 				</Menu.Item>
-				<Menu.Item key="/login" className={this.state.reserved?'menuItem':'menuItem reserved'}>
-					<Link to="/LoginPage"><Icon type="login" />Login</Link>
-				</Menu.Item>
 			</Menu>
 
-			<Route exact path="/" component={HomePage} />
-			<Route exact path="/LoginPage" component={LoginPage} />
+			<Route exact path="/homepage" component={HomePage} />
+			<Route exact path="/AboutPage" component={AboutPage} />
+			<Route exact path="/" component={Login} />
+			<Container style={{marginTop: '25px'}}>
+				<Route exact path="/AboutPage" component={AboutPage} />
+				<Route exact path="/inbox" component={Mailbox} />
+				<Route exact path="/register" component={Register} />
+			</Container>
 			<PrivateRoute exact path="/UserPage" component={UserPage} authenticated={this.state.authenticated}/>
+			<PrivateRoute exact path="/ProfilePage" component={GuideProfilePage} authenticated={this.state.authenticated}/>
 		</Router>
 		</>
 		);

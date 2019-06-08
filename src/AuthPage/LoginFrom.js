@@ -13,7 +13,7 @@ class NormalLoginForm extends Component {
         try {
           const user = await firebase_app
             .auth()
-            .signInWithEmailAndPassword(userName.value, password.value);
+            .signInWithEmailAndPassword(userName.value, password.value)
             alert("You are now connected !");
             this.state.user = userName.value;
         } catch (error) {
